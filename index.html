@@ -1,0 +1,2363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Priyanka Singh — AI Engineer & Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink:#f472b6;
+  --pink-dim:#9d4071;
+  --pink-glow:rgba(244,114,182,0.15);
+  --bg:#0a0a0b;
+  --bg2:#111114;
+  --bg3:#18181d;
+  --text:#f0eee8;
+  --text2:#9b9792;
+  --border:rgba(244,114,182,0.12);
+  --border2:rgba(255,255,255,0.06);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Syne',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+a,button,[role="button"]{cursor:none}
+
+.cursor-dot,.cursor-trail{
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  z-index:9999;
+  opacity:0;
+  transform:translate(-50%,-50%);
+  transition:opacity 0.2s ease;
+}
+.cursor-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--pink);
+  box-shadow:0 0 12px rgba(244,114,182,0.9),0 0 24px rgba(244,114,182,0.35);
+}
+.cursor-trail{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid rgba(244,114,182,0.45);
+  background:rgba(244,114,182,0.08);
+  filter:blur(0.2px);
+}
+.cursor-dot.is-visible,.cursor-trail.is-visible{opacity:1}
+
+@media (pointer: coarse){
+  body,a,button,[role="button"]{cursor:auto}
+  .cursor-dot,.cursor-trail{display:none}
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--pink-dim);border-radius:2px}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 4rem;
+  background:rgba(10,10,11,0.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+  transition:all 0.3s;
+}
+.nav-logo{
+  font-family:'DM Serif Display',serif;
+  font-size:1.5rem;
+  color:var(--pink);
+  letter-spacing:0.02em;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:var(--text2);font-size:0.85rem;font-weight:600;
+  text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
+  background:var(--pink);transition:width 0.3s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  background:var(--pink);color:#0a0a0b;
+  border:none;padding:0.6rem 1.4rem;border-radius:100px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;
+  letter-spacing:0.05em;cursor:pointer;text-decoration:none;
+  transition:all 0.2s;display:inline-block;
+}
+.nav-cta:hover{background:#fff;transform:translateY(-1px)}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(244,114,182,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 85% 80%, rgba(244,114,182,0.08) 0%, transparent 60%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(244,114,182,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,114,182,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  text-align:center;
+  max-width:860px;padding:2rem;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(244,114,182,0.08);
+  border:1px solid rgba(244,114,182,0.2);
+  color:var(--pink);font-size:0.78rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.4rem 1rem;border-radius:100px;
+  margin-bottom:2rem;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--pink);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.hero-photo-wrap{
+  position:relative;display:inline-block;
+  margin-bottom:2rem;
+  animation:fadeUp 0.6s 0.1s ease both;
+}
+.hero-photo{
+  width:110px;height:110px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--pink);
+  filter:grayscale(15%);
+}
+.hero-photo-ring{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(244,114,182,0.3);
+  animation:spin 12s linear infinite;
+}
+.hero-photo-ring::before{
+  content:'';position:absolute;top:0;left:50%;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--pink);transform:translateX(-50%);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+h1.hero-name{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(3rem,8vw,5.5rem);
+  line-height:1.0;
+  letter-spacing:-0.02em;
+  margin-bottom:0.75rem;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+h1.hero-name span{color:var(--pink)}
+.hero-typewriter{
+  font-size:1rem;font-weight:500;color:var(--text2);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:1.5rem;min-height:1.5rem;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+.hero-typewriter .cursor{
+  display:inline-block;width:2px;height:1em;
+  background:var(--pink);margin-left:2px;
+  animation:blink 0.8s infinite;vertical-align:middle;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-desc{
+  color:var(--text2);max-width:520px;margin:0 auto 2.5rem;
+  font-size:0.95rem;line-height:1.8;
+  animation:fadeUp 0.6s 0.4s ease both;
+}
+.hero-btns{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:3rem;
+  animation:fadeUp 0.6s 0.5s ease both;
+}
+.btn-primary{
+  background:var(--pink);color:#0a0a0b;
+  padding:0.85rem 2rem;border-radius:100px;
+  font-weight:700;font-size:0.9rem;letter-spacing:0.04em;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem;
+}
+.btn-primary:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(244,114,182,0.3)}
+.btn-secondary{
+  background:transparent;color:var(--text);
+  padding:0.85rem 2rem;border-radius:100px;
+  font-weight:600;font-size:0.9rem;letter-spacing:0.04em;
+  text-decoration:none;border:1px solid var(--border2);cursor:pointer;
+  transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem;
+}
+.btn-secondary:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
+.hero-socials{
+  display:flex;gap:1.5rem;justify-content:center;
+  animation:fadeUp 0.6s 0.6s ease both;
+}
+.hero-social{
+  color:var(--text2);text-decoration:none;font-size:0.8rem;
+  font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  transition:color 0.2s;display:flex;align-items:center;gap:0.4rem;
+}
+.hero-social:hover{color:var(--pink)}
+.hero-social svg{width:14px;height:14px;fill:currentColor}
+.scroll-indicator{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  animation:fadeUp 0.6s 0.8s ease both;
+}
+.scroll-line{
+  width:1px;height:40px;background:linear-gradient(to bottom,var(--pink),transparent);
+  animation:scrollDown 2s infinite;
+}
+@keyframes scrollDown{0%{opacity:0;transform:scaleY(0);transform-origin:top}40%{opacity:1}100%{opacity:0;transform:scaleY(1);transform-origin:top}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── SECTIONS ─── */
+section{padding:6rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:0.75rem;display:block;
+}
+.section-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,5vw,3rem);
+  line-height:1.1;margin-bottom:1rem;
+}
+.section-line{
+  width:40px;height:2px;background:var(--pink);
+  margin-bottom:3.5rem;
+}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─── EDUCATION ─── */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.edu-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:16px;
+  padding:2rem;position:relative;overflow:hidden;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.edu-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--pink),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.edu-card:hover{border-color:rgba(244,114,182,0.3);transform:translateY(-4px)}
+.edu-card:hover::before{opacity:1}
+.edu-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;font-size:1.2rem;
+}
+.edu-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.4rem}
+.edu-card .school{color:var(--pink);font-size:0.9rem;font-weight:600;margin-bottom:0.25rem}
+.edu-card .year{color:var(--text2);font-size:0.82rem;margin-bottom:0.75rem}
+.edu-cgpa{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(244,114,182,0.1);color:var(--pink);
+  font-size:0.82rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;
+}
+
+/* ─── PROJECTS ─── */
+.projects-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+.project-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:20px;
+  padding:2rem 2.5rem;
+  display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;
+  transition:border-color 0.3s,transform 0.3s;position:relative;overflow:hidden;
+}
+.project-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 40% 60% at 100% 50%, rgba(244,114,182,0.04), transparent);
+  opacity:0;transition:opacity 0.3s;pointer-events:none;
+}
+.project-card:hover{border-color:rgba(244,114,182,0.25);transform:translateY(-3px)}
+.project-card:hover::after{opacity:1}
+.project-card::before{
+  content:'View Case Study →';
+  position:absolute;bottom:2rem;right:2.5rem;
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  color:var(--pink);opacity:0;transform:translateX(-10px);
+  transition:all 0.3s;pointer-events:none;z-index:2;
+}
+.project-card:hover::before{opacity:1;transform:translateX(0)}
+@media(max-width:768px){ .project-card::before{display:none} }
+.proj-num{
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  color:var(--pink);letter-spacing:0.1em;margin-bottom:0.75rem;display:block;
+}
+.project-card h3{font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
+.project-card p{color:var(--text2);font-size:0.9rem;line-height:1.7;margin-bottom:1.25rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.5rem}
+.proj-tag{
+  background:rgba(255,255,255,0.05);color:var(--text2);
+  font-size:0.75rem;font-weight:600;font-family:'DM Mono',monospace;
+  padding:0.3rem 0.75rem;border-radius:100px;border:1px solid var(--border2);
+  transition:all 0.2s;
+}
+.proj-tag:hover{border-color:var(--pink);color:var(--pink)}
+.proj-links{display:flex;flex-direction:column;gap:0.75rem;min-width:120px}
+.proj-link{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  color:var(--text2);font-size:0.8rem;font-weight:600;letter-spacing:0.06em;
+  text-decoration:none;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.proj-link:hover{color:var(--pink)}
+.proj-link svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+.proj-impact{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(244,114,182,0.08);color:var(--pink);
+  font-size:0.78rem;font-weight:600;padding:0.35rem 0.8rem;
+  border-radius:100px;margin-bottom:0.75rem;
+  border:1px solid rgba(244,114,182,0.15);
+}
+
+/* ─── SKILLS ─── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.skill-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:16px;
+  padding:1.75rem;transition:border-color 0.3s;
+}
+.skill-card:hover{border-color:rgba(244,114,182,0.2)}
+.skill-card-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
+.skill-icon{font-size:1.1rem}
+.skill-cat{font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2)}
+.skill-items{display:flex;flex-direction:column;gap:0.75rem}
+.skill-item{display:flex;flex-direction:column;gap:0.4rem}
+.skill-item-row{display:flex;justify-content:space-between;align-items:center}
+.skill-name{font-size:0.88rem;font-weight:600;color:var(--text)}
+.skill-pct{font-size:0.72rem;font-family:'DM Mono',monospace;color:var(--pink)}
+.skill-bar-bg{height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.skill-bar{height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-dim));border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.22,1,0.36,1)}
+
+/* ─── OPEN SOURCE ─── */
+.os-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:16px;
+  padding:2rem 2.5rem;display:flex;gap:2rem;align-items:flex-start;
+  transition:border-color 0.3s;
+}
+.os-card:hover{border-color:rgba(244,114,182,0.25)}
+.os-gh-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.os-gh-icon svg{width:22px;height:22px;fill:var(--pink)}
+.os-card h3{font-size:1.15rem;font-weight:700;margin-bottom:0.5rem}
+.os-card p{color:var(--text2);font-size:0.9rem;line-height:1.7;margin-bottom:1rem}
+
+/* ─── ACHIEVEMENTS ─── */
+.ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.ach-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:16px;
+  padding:1.75rem;text-align:center;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.ach-card:hover{border-color:rgba(244,114,182,0.3);transform:translateY(-4px)}
+.ach-icon{
+  width:50px;height:50px;border-radius:14px;
+  background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin:0 auto 1.25rem;
+}
+.ach-num{
+  font-family:'DM Serif Display',serif;
+  font-size:2rem;color:var(--pink);line-height:1;margin-bottom:0.5rem;
+}
+.ach-card h3{font-size:0.9rem;font-weight:700;margin-bottom:0.5rem}
+.ach-card p{color:var(--text2);font-size:0.8rem;line-height:1.5}
+
+/* ─── LEETCODE LIVE WIDGET ─── */
+.leetcode-widget{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:18px;
+  padding:2rem;position:relative;overflow:hidden;
+}
+.leetcode-widget::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 45% 80% at 100% 40%, rgba(244,114,182,0.07), transparent);
+  pointer-events:none;
+}
+.leetcode-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;position:relative;z-index:1}
+.leetcode-title{display:flex;align-items:center;gap:0.6rem;font-size:1.1rem;font-weight:700}
+.leetcode-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 0 var(--pink-glow);animation:livePulse 2s infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 var(--pink-glow)}70%{box-shadow:0 0 0 10px rgba(244,114,182,0)}100%{box-shadow:0 0 0 0 rgba(244,114,182,0)}}
+.leetcode-status{font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text2)}
+.leetcode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;position:relative;z-index:1}
+.lc-stat{
+  background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:12px;
+  padding:1rem;
+}
+.lc-label{font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text2);margin-bottom:0.4rem}
+.lc-value{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1;color:var(--pink)}
+.lc-foot{margin-top:1rem;position:relative;z-index:1}
+.lc-foot a{color:var(--text2);font-size:0.8rem;text-decoration:none;transition:color 0.2s}
+.lc-foot a:hover{color:var(--pink)}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--bg2);border-top:1px solid var(--border2)}
+.contact-inner{text-align:center;max-width:600px;margin:0 auto}
+.contact-inner .section-title{font-size:clamp(2rem,5vw,3.5rem)}
+.contact-inner p{color:var(--text2);margin-bottom:3rem;font-size:0.95rem;line-height:1.8}
+.contact-email{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  color:var(--pink);font-family:'DM Mono',monospace;font-size:1rem;
+  text-decoration:none;margin-bottom:2.5rem;
+  transition:opacity 0.2s;
+}
+.contact-email:hover{opacity:0.7}
+.contact-phone{
+  display:block;color:var(--text2);font-family:'DM Mono',monospace;
+  font-size:0.9rem;margin-bottom:2.5rem;
+}
+.socials-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.social-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text);padding:0.7rem 1.5rem;border-radius:100px;
+  text-decoration:none;font-size:0.85rem;font-weight:600;
+  transition:all 0.2s;
+}
+.social-btn:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
+.social-btn svg{width:16px;height:16px;fill:currentColor}
+
+/* ─── FOOTER ─── */
+footer{
+  text-align:center;padding:2rem;
+  color:var(--text2);font-size:0.8rem;
+  border-top:1px solid var(--border2);
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .edu-grid,.skills-grid{grid-template-columns:1fr}
+  .ach-grid{grid-template-columns:1fr 1fr}
+  .project-card{grid-template-columns:1fr}
+  .proj-links{flex-direction:row}
+  .os-card{flex-direction:column}
+  .leetcode-grid{grid-template-columns:1fr}
+}
+
+/* ─── PROJECT MODAL (CENTERED POPUP) ─── */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transition: visibility 0s 0.4s;
+  padding: 2rem;
+}
+.modal.is-open {
+  visibility: visible;
+  transition: visibility 0s;
+}
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.8);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.modal.is-open .modal-overlay {
+  opacity: 1;
+}
+.modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  transform: translateY(40px) scale(0.95);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1;
+}
+.modal.is-open .modal-container {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.modal-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border2);
+  color: var(--text);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-close:hover {
+  background: var(--pink);
+  color: #0a0a0b;
+  transform: rotate(90deg);
+}
+.modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4rem 3rem;
+  scrollbar-width: none;
+}
+.modal-content::-webkit-scrollbar { display: none; }
+
+.modal-header {
+  margin-bottom: 4rem;
+}
+.modal-header .proj-num { font-size: 0.8rem; margin-bottom: 1rem; display: block; }
+.modal-header .section-title { font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.1; margin: 1rem 0; }
+.modal-header .proj-impact { margin-bottom: 1.5rem; }
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.modal-section h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.25rem;
+  opacity: 0.8;
+}
+.modal-section p {
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  opacity: 0.85;
+}
+.modal-footer {
+  padding: 2.5rem 3rem;
+  border-top: 1px solid var(--border2);
+  background: var(--bg2);
+  display: flex;
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .modal-container { max-width: 100%; }
+  .modal-content { padding: 5rem 1.5rem 3rem; }
+  .modal-footer { padding: 1.5rem; }
+}
+
+/* ─── VISUAL CASE STUDY ─── */
+.vs-hero { text-align: center; padding: 2rem 0 5rem; position: relative; }
+.vs-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--pink); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; }
+.vs-title { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-family: 'DM Serif Display', serif; }
+.vs-title span { color: var(--pink); display: block; font-style: italic; }
+.vs-subtitle { font-size: 1.1rem; color: var(--text2); margin-bottom: 2.5rem; }
+.vs-tags { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+.vs-tags span { background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.2); color: var(--pink); padding: 0.4rem 1.2rem; border-radius: 100px; font-family: 'DM Mono', monospace; font-size: 0.75rem; }
+
+.vs-section { padding: 5rem 0; position: relative; }
+.vs-section-title { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--pink); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 3rem; text-align: center; opacity: 0.7; }
+
+.vs-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.code-blur { background: #000; border: 1px solid var(--border2); padding: 1.5rem; border-radius: 16px; position: relative; overflow: hidden; }
+.code-blur pre { filter: blur(2px); opacity: 0.5; font-size: 0.8rem; margin: 0; }
+.code-blur::after { content: 'Complexity'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; color: var(--pink); text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 0 0 20px var(--pink); }
+
+.vs-problem-right { display: flex; flex-direction: column; gap: 1.5rem; }
+.vs-icon-box { background: var(--bg2); border: 1px solid var(--border2); padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem; font-weight: 600; transition: all 0.3s; }
+.vs-icon-box:hover { border-color: var(--pink); transform: translateX(10px); }
+.vs-icon-box span { font-size: 1.5rem; filter: drop-shadow(0 0 8px var(--pink)); }
+
+.vs-idea-card { background: radial-gradient(circle at center, rgba(244,114,182,0.1) 0%, transparent 70%); border: 1px solid var(--border); padding: 4rem 2rem; border-radius: 24px; text-align: center; position: relative; overflow: hidden; }
+.vs-idea-card h2 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 2rem; position: relative; z-index: 1; }
+.vs-idea-card h2 span { color: var(--pink); font-style: italic; text-shadow: 0 0 20px var(--pink); }
+.vs-idea-icons { display: flex; justify-content: center; gap: 2rem; align-items: center; position: relative; z-index: 1; }
+.pulse-icon { font-size: 3rem; animation: pulseGlow 2s infinite; }
+@keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+
+.vs-flowchart { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+.flow-node { background: var(--bg2); border: 1px solid var(--border2); padding: 1.2rem 2rem; border-radius: 12px; width: 100%; max-width: 300px; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.8rem; transition: all 0.3s; }
+.flow-node:hover { border-color: var(--pink); transform: scale(1.05); box-shadow: 0 0 30px rgba(244,114,182,0.1); }
+.flow-arrow { color: var(--pink); font-size: 1.5rem; animation: arrowBounce 1.5s infinite; }
+@keyframes arrowBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+.vs-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
+.vs-step { text-align: center; position: relative; }
+.step-num { width: 32px; height: 32px; background: var(--pink); color: #0a0a0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; margin: 0 auto 1.5rem; }
+.vs-step h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+.vs-step p { font-size: 0.75rem; color: var(--text2); }
+
+.vs-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.vs-feature-card { background: var(--bg3); border: 1px solid var(--border2); border-radius: 16px; padding: 1.5rem; text-align: center; }
+.feature-anim { height: 100px; background: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: flex-end; justify-content: center; gap: 4px; padding: 10px; }
+.bar { width: 8px; background: var(--pink); border-radius: 2px; }
+
+.vs-impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border2); border-radius: 20px; overflow: hidden; border: 1px solid var(--border2); }
+.vs-impact-side { background: var(--bg); padding: 3rem 2rem; text-align: center; }
+.vs-impact-side.after { background: var(--bg2); }
+.vs-impact-side h4 { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text2); text-transform: uppercase; margin-bottom: 2rem; }
+.vs-impact-side .icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.vs-impact-side .label { font-weight: 700; font-size: 1.2rem; }
+
+.vs-challenge-flow { display: flex; flex-direction: column; gap: 1.5rem; }
+.vs-challenge-card { background: var(--bg3); border: 1px solid var(--border2); border-radius: 16px; padding: 1.5rem; display: flex; align-items: center; gap: 2rem; }
+.challenge-p { flex: 1; color: var(--text2); font-size: 0.9rem; }
+.challenge-arrow { color: var(--pink); font-weight: 700; }
+.challenge-s { flex: 1; color: var(--text); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+.challenge-s::before { content: '✓'; color: var(--pink); font-weight: 900; }
+
+.vs-roadmap { display: flex; justify-content: space-between; position: relative; padding: 2rem 0; }
+.vs-roadmap::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border2); z-index: 0; }
+.roadmap-item { background: var(--bg); border: 1px solid var(--border2); padding: 0.6rem 1.2rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; position: relative; z-index: 1; }
+.roadmap-item.active { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 20px rgba(244,114,182,0.1); }
+
+@media (max-width: 768px) {
+  .vs-problem-grid, .vs-feature-grid, .vs-impact-grid { grid-template-columns: 1fr; }
+  .vs-challenge-card { flex-direction: column; gap: 1rem; text-align: center; }
+  .vs-roadmap { flex-direction: column; gap: 1rem; align-items: center; }
+  .vs-roadmap::before { display: none; }
+}
+
+/* ─── ECOSYSTEM ADDITIONS ─── */
+.hub-spoke { position: relative; height: 500px; width: 100%; max-width: 800px; margin: 4rem auto; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(244,114,182,0.05) 0%, transparent 70%); border-radius: 50%; }
+.hub-grid-bg { position: absolute; inset: 0; background-image: radial-gradient(var(--border2) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.2; pointer-events: none; }
+
+.ai-core { 
+  width: 160px; height: 160px; background: radial-gradient(circle, var(--pink) 0%, #0a0a0b 100%); 
+  border: 3px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; 
+  justify-content: center; z-index: 10; box-shadow: 0 0 60px var(--pink-glow); animation: corePulse 4s infinite ease-in-out; 
+  position: relative; cursor: pointer;
+}
+.ai-core::before { content: ''; position: absolute; inset: -15px; border: 1px dashed var(--pink); border-radius: 50%; opacity: 0.3; animation: rotate 20s linear infinite; }
+.ai-core span:first-child { font-size: 2.5rem; margin-bottom: 0.5rem; filter: drop-shadow(0 0 10px #fff); }
+.ai-core span:last-child { font-weight: 900; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; color: #fff; text-shadow: 0 0 10px var(--pink); }
+
+@keyframes corePulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 60px var(--pink-glow); } 50% { transform: scale(1.08); box-shadow: 0 0 100px var(--pink-glow); } }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.system-node { 
+  position: absolute; background: rgba(20, 20, 22, 0.8); border: 1px solid var(--border); 
+  padding: 1.2rem 1.8rem; border-radius: 20px; width: 180px; text-align: center; z-index: 10; 
+  backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+}
+.system-node:hover { border-color: var(--pink); transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 40px rgba(244,114,182,0.2); }
+.system-node i { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; filter: drop-shadow(0 0 8px var(--pink)); }
+.system-node h4 { font-size: 0.9rem; margin-bottom: 0.3rem; font-weight: 800; }
+.system-node p { font-size: 0.65rem; color: var(--text2); line-height: 1.3; }
+
+.system-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.system-path { fill: none; stroke: var(--pink); stroke-width: 2; stroke-dasharray: 8 12; opacity: 0.3; animation: flowDash 30s linear infinite; }
+.flow-dot { fill: var(--pink); filter: blur(2px); animation: flowMove 4s infinite linear; }
+
+@keyframes flowDash { to { stroke-dashoffset: -1000; } }
+
+.h-scroll-container { display: flex; gap: 2rem; overflow-x: auto; padding: 2rem 0; scrollbar-width: none; }
+.h-scroll-container::-webkit-scrollbar { display: none; }
+.h-card { min-width: 320px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 24px; padding: 2.5rem; transition: all 0.3s; }
+.h-card:hover { border-color: var(--pink); transform: translateY(-10px); }
+.h-card h4 { font-size: 1.3rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+.h-card .flow-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--pink); border: 1px solid rgba(244,114,182,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 1rem; display: inline-block; }
+
+.intel-pipeline { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin: 4rem 0; }
+.pipe-node { background: var(--bg2); border: 1px solid var(--border2); padding: 1rem 2rem; border-radius: 12px; width: 100%; max-width: 400px; text-align: center; position: relative; }
+.pipe-node.highlight { border-color: var(--pink); background: rgba(244,114,182,0.05); color: var(--pink); font-weight: 700; }
+.pipe-arrow { color: var(--pink); font-size: 1.5rem; height: 30px; display: flex; align-items: center; }
+
+.realtime-sync { background: #000; border: 1px solid var(--border2); border-radius: 16px; padding: 2rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+.sync-user { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.sync-user .icon { width: 40px; height: 40px; background: var(--bg3); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.sync-line { flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--pink) 0 10px, transparent 10px 20px); margin: 0 1rem; animation: syncFlow 1s linear infinite; }
+@keyframes syncFlow { from { background-position: 0 0; } to { background-position: 20px 0; } }
+
+
+/* Modal content animations */
+.modal.is-open .modal-header { animation: modalFadeIn 0.6s 0.2s both; }
+.modal.is-open .modal-section:nth-child(1) { animation: modalFadeIn 0.6s 0.3s both; }
+.modal.is-open .modal-section:nth-child(2) { animation: modalFadeIn 0.6s 0.4s both; }
+.modal.is-open .modal-section:nth-child(3) { animation: modalFadeIn 0.6s 0.5s both; }
+.modal.is-open .modal-section:nth-child(4) { animation: modalFadeIn 0.6s 0.6s both; }
+.modal.is-open .modal-footer { animation: modalFadeIn 0.6s 0.7s both; }
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+</head>
+<body>
+
+<div class="cursor-trail"></div>
+<div class="cursor-dot"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="Priyanka_Singh_Resume.pdf" download>Download CV</a>
+</nav>
+
+<!-- HERO -->
+<section id="about" style="padding:0">
+  <div id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">Open to Opportunities</div>
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="portrait.png" alt="Priyanka Singh" onerror="this.style.display='none'"/>
+        <div class="hero-photo-ring"></div>
+      </div>
+      <h1 class="hero-name">Priyanka <span>Singh</span></h1>
+      <div class="hero-typewriter">
+        <span id="typewriter-text"></span><span class="cursor"></span>
+      </div>
+      <p class="hero-desc">
+        Aspiring researcher with a strong foundation in machine learning, data analysis, and scalable systems.
+        Building real-world solutions through data-driven approaches, optimization, and applied AI.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#projects">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          View My Work
+        </a>
+        <a class="btn-secondary" href="mailto:ps.15102004@gmail.com?subject=Resume%20Request">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Request Resume
+        </a>
+      </div>
+      <div class="hero-socials">
+        <a class="hero-social" href="https://www.linkedin.com/in/priyanka-singh-a1728b233/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="hero-social" href="https://github.com/Priyanka-2725" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a class="hero-social" href="https://leetcode.com/u/Priyanka_2725/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.901l-2.609-2.519c-.569-.569-1.234-.955-1.959-1.164l2.269-2.207c.522-.506.531-1.337.026-1.862-.506-.524-1.337-.531-1.862-.026l-10.552 10.343c-.798.78-1.234 1.812-1.234 2.924s.449 2.143 1.234 2.924l4.299 4.281c.798.781 1.864 1.234 2.924 1.234 1.059 0 2.126-.453 2.924-1.234l2.705-2.607c.514-.514.496-1.365-.039-1.9s-1.386-.553-1.899-.039zM20.811 13.01H10.666c-.702 0-1.27.604-1.27 1.346s.568 1.346 1.27 1.346h10.145c.701 0 1.27-.604 1.27-1.346s-.569-1.346-1.27-1.346z"/></svg>
+          LeetCode
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <span class="section-label reveal">Background</span>
+    <h2 class="section-title reveal">Education</h2>
+    <div class="section-line reveal"></div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-icon">🎓</div>
+        <h3>B.Tech in Computer Science</h3>
+        <div class="school">Noida Institute of Engineering and Technology</div>
+        <div class="year">2023 – Present</div>
+        <span class="edu-cgpa">★ CGPA: 9.31</span>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-icon">🏫</div>
+        <h3>Class XII &amp; X</h3>
+        <div class="school">The Aditya Birla Public School</div>
+        <div class="year">2021 – 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg2)">
+  <div class="section-inner">
+    <span class="section-label reveal">What I've Built</span>
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="section-line reveal"></div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal" data-project-id="01" style="cursor: pointer;">
+        <div>
+          <span class="proj-num">01 / PROJECT</span>
+          <div class="proj-impact">🚀 AI-Powered Interview Preparation Ecosystem</div>
+          <h3>Algo Vista — Sprint Universe</h3>
+          <p>A complete intelligent ecosystem from Learning & Visualization to Real-time Competition & AI Interviews. Unified platform for technical mastery.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">Node.js</span>
+            <span class="proj-tag">Socket.io</span>
+            <span class="proj-tag">OpenAI</span>
+            <span class="proj-tag">Firebase</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Priyanka-2725" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a class="proj-link" href="#" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-project-id="02" style="cursor: pointer;">
+        <div>
+          <span class="proj-num">02 / PROJECT</span>
+          <div class="proj-impact">🤝 Centralized NGO Discovery & Social Action</div>
+          <h3>GiveWay — Social Impact Platform</h3>
+          <p>A structured ecosystem for location-based and cause-based NGO navigation. Simplifying social contribution through data clarity.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Java</span>
+            <span class="proj-tag">JDBC</span>
+            <span class="proj-tag">MySQL</span>
+            <span class="proj-tag">CSS</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Priyanka-2725" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-project-id="03" style="cursor: pointer;">
+        <div>
+          <span class="proj-num">03 / PROJECT</span>
+          <div class="proj-impact">🌾 4 ML Models Compared · Random Forest Winner</div>
+          <h3>Crop Yield Prediction System</h3>
+          <p>End-to-end ML pipeline comparing 4 models across soil and weather datasets. Best result with Random Forest after feature engineering and outlier removal. Deployed via FastAPI with input validation and structured response schemas.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">Pandas</span>
+            <span class="proj-tag">NumPy</span>
+            <span class="proj-tag">Scikit-learn</span>
+            <span class="proj-tag">Random Forest</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Priyanka-2725" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- PROJECT 04 -->
+      <div class="project-card reveal" data-project-id="04" style="cursor: pointer;">
+        <div>
+          <span class="proj-num">04 / PROJECT</span>
+          <div class="proj-impact">🚀 Event-Driven Campus Platform</div>
+          <h3>Campus Exchange Hub</h3>
+          <p>A unified ecosystem for buying/selling, event management, and peer collaboration. Built with event-driven architecture and AI-assisted workflows.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Spring Boot</span>
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">MySQL</span>
+            <span class="proj-tag">JWT</span>
+            <span class="proj-tag">Tailwind</span>
+          </div>
+        </div>
+        <div class="proj-links">
+          <a class="proj-link" href="https://github.com/Priyanka-2725" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN SOURCE -->
+<section id="research">
+  <div class="section-inner">
+    <span class="section-label reveal">Community</span>
+    <h2 class="section-title reveal">Open Source</h2>
+    <div class="section-line reveal"></div>
+    <div class="os-card reveal">
+      <div class="os-gh-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      </div>
+      <div>
+        <h3>PentAGI — AI Security Platform</h3>
+        <p>Contributed to PentAGI, an AI-driven security platform, by fixing bugs and implementing performance enhancements via pull requests in a distributed Git workflow with formal code reviews.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Bug Fixes</span>
+          <span class="proj-tag">Performance Optimization</span>
+          <span class="proj-tag">Code Review</span>
+          <span class="proj-tag">Git Workflow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--bg2)">
+  <div class="section-inner">
+    <span class="section-label reveal">Capabilities</span>
+    <h2 class="section-title reveal">Technical Skills</h2>
+    <div class="section-line reveal"></div>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <span class="skill-icon">⌨️</span>
+          <span class="skill-cat">Languages</span>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Python</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">JavaScript / TypeScript</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Java</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">C</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="70"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <span class="skill-icon">🧠</span>
+          <span class="skill-cat">ML / Data</span>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Scikit-learn</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Pandas / NumPy</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Feature Engineering</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Model Evaluation</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="82"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <span class="skill-icon">⚛️</span>
+          <span class="skill-cat">Frontend</span>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">React / Next.js</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Tailwind CSS</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Bootstrap</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="80"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <span class="skill-icon">⚙️</span>
+          <span class="skill-cat">Backend</span>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Node.js / REST APIs</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">FastAPI</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="78"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Firebase Cloud Functions</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="75"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <span class="skill-icon">🗄️</span>
+          <span class="skill-cat">Databases</span>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">MongoDB</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">MySQL</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">Firebase Firestore</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="80"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <span class="skill-icon">🧩</span>
+          <span class="skill-cat">Core Concepts</span>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">DSA</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">System Design</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-row"><span class="skill-name">DBMS</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-w="78"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <span class="section-label reveal">Milestones</span>
+    <h2 class="section-title reveal">Achievements</h2>
+    <div class="section-line reveal"></div>
+    <div class="ach-grid">
+      <div class="ach-card reveal">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-num" data-count="400">0</div>
+        <h3>DSA Problems Solved</h3>
+        <p>400+ problems on LeetCode across arrays, trees, graphs, and dynamic programming</p>
+      </div>
+      <div class="ach-card reveal">
+        <div class="ach-icon">🥇</div>
+        <div class="ach-num">2<span style="font-size:1rem">nd</span></div>
+        <h3>All-Branch Topper</h3>
+        <p>Achieved 2nd rank across all branches at NIET — 2024</p>
+      </div>
+      <div class="ach-card reveal">
+        <div class="ach-icon">💡</div>
+        <div class="ach-num">SIH</div>
+        <h3>Smart India Hackathon</h3>
+        <p>Cleared Smart India Hackathon Internal Round 2025</p>
+      </div>
+      <div class="ach-card reveal">
+        <div class="ach-icon">⭐</div>
+        <div class="ach-num">3×</div>
+        <h3>Olympiad Medalist</h3>
+        <p>Medalist in IMO, NSO, and IEO national competitions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEETCODE LIVE STATS -->
+<section id="leetcode" style="background:var(--bg2)">
+  <div class="section-inner">
+    <span class="section-label reveal">Coding Profile</span>
+    <h2 class="section-title reveal">Live LeetCode Stats</h2>
+    <div class="section-line reveal"></div>
+    <div class="leetcode-widget reveal">
+      <div class="leetcode-head">
+        <div class="leetcode-title"><span class="leetcode-dot"></span>LeetCode Dashboard</div>
+        <div id="lc-status" class="leetcode-status">Loading live data...</div>
+      </div>
+      <div class="leetcode-grid">
+        <div class="lc-stat">
+          <div class="lc-label">Solved</div>
+          <div id="lc-solved" class="lc-value">--</div>
+        </div>
+        <div class="lc-stat">
+          <div class="lc-label">Acceptance</div>
+          <div id="lc-acceptance" class="lc-value">--</div>
+        </div>
+        <div class="lc-stat">
+          <div class="lc-label">Ranking</div>
+          <div id="lc-ranking" class="lc-value">--</div>
+        </div>
+      </div>
+      <div class="lc-foot">
+        <a href="https://leetcode.com/u/Priyanka_2725/" target="_blank">View full profile on LeetCode</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <span class="section-label reveal" style="display:block;text-align:center">Let's Connect</span>
+      <h2 class="section-title reveal" style="text-align:center">Get In Touch</h2>
+      <div class="section-line reveal" style="margin:1rem auto 2rem"></div>
+      <p class="reveal">I'm currently open to internships, research collaborations, and full-stack / ML opportunities. Feel free to reach out!</p>
+      <a class="contact-email reveal" href="mailto:ps.15102004@gmail.com">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        ps.15102004@gmail.com
+      </a>
+      <span class="contact-phone reveal">+91 8957126509</span>
+      <div class="socials-row reveal">
+        <a class="social-btn" href="https://www.linkedin.com/in/priyanka-singh-a1728b233/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="social-btn" href="https://github.com/Priyanka-2725" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a class="social-btn" href="https://leetcode.com/u/Priyanka_2725/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.901l-2.609-2.519c-.569-.569-1.234-.955-1.959-1.164l2.269-2.207c.522-.506.531-1.337.026-1.862-.506-.524-1.337-.531-1.862-.026l-10.552 10.343c-.798.78-1.234 1.812-1.234 2.924s.449 2.143 1.234 2.924l4.299 4.281c.798.781 1.864 1.234 2.924 1.234 1.059 0 2.126-.453 2.924-1.234l2.705-2.607c.514-.514.496-1.365-.039-1.9s-1.386-.553-1.899-.039zM20.811 13.01H10.666c-.702 0-1.27.604-1.27 1.346s.568 1.346 1.27 1.346h10.145c.701 0 1.27-.604 1.27-1.346s-.569-1.346-1.27-1.346z"/></svg>
+          LeetCode
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="color:var(--text2)">Designed &amp; built by <span style="color:var(--pink)">Priyanka Singh</span> · 2025</p>
+</footer>
+
+<script>
+// ─── TYPEWRITER ───
+const roles = ['Aspiring AI Engineer','Full Stack Developer','Research Enthusiast','ML Enthusiast'];
+let ri=0,ci=0,deleting=false;
+const tw = document.getElementById('typewriter-text');
+function type(){
+  const word = roles[ri];
+  if(!deleting){
+    tw.textContent = word.slice(0,ci+1);
+    ci++;
+    if(ci===word.length){deleting=true;setTimeout(type,1800);return}
+  } else {
+    tw.textContent = word.slice(0,ci-1);
+    ci--;
+    if(ci===0){deleting=false;ri=(ri+1)%roles.length}
+  }
+  setTimeout(type, deleting ? 50 : 80);
+}
+type();
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // skill bars
+      e.target.querySelectorAll('.skill-bar[data-w]').forEach(b=>{
+        b.style.width = b.dataset.w + '%';
+      });
+    }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ─── COUNTER ANIMATION ───
+function animateCount(el){
+  const target = parseInt(el.dataset.count);
+  let current = 0;
+  const step = target / 60;
+  const timer = setInterval(()=>{
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + (current>=target?'+':'');
+    if(current>=target) clearInterval(timer);
+  }, 20);
+}
+const countObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-count]').forEach(animateCount);
+      countObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.ach-grid').forEach(el=>countObserver.observe(el));
+
+// ─── CUSTOM CURSOR ───
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorTrail = document.querySelector('.cursor-trail');
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let dotX = mouseX;
+let dotY = mouseY;
+let trailX = mouseX;
+let trailY = mouseY;
+document.addEventListener('mousemove', (event)=>{
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+  cursorDot.classList.add('is-visible');
+  cursorTrail.classList.add('is-visible');
+});
+document.addEventListener('mouseleave', ()=>{
+  cursorDot.classList.remove('is-visible');
+  cursorTrail.classList.remove('is-visible');
+});
+(function animateCursor(){
+  dotX += (mouseX - dotX) * 0.35;
+  dotY += (mouseY - dotY) * 0.35;
+  trailX += (mouseX - trailX) * 0.12;
+  trailY += (mouseY - trailY) * 0.12;
+  cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+  cursorTrail.style.transform = `translate(${trailX}px, ${trailY}px) translate(-50%, -50%)`;
+  requestAnimationFrame(animateCursor);
+})();
+
+// ─── LIVE LEETCODE STATS ───
+async function fetchJsonWithFallback(url){
+  try {
+    const direct = await fetch(url, { cache: 'no-store' });
+    if (direct.ok) return await direct.json();
+  } catch (e) {}
+
+  try {
+    const proxied = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`, { cache: 'no-store' });
+    if (proxied.ok) return await proxied.json();
+  } catch (e) {}
+
+  return null;
+}
+
+function formatRanking(value){
+  if (!value || Number.isNaN(Number(value))) return '--';
+  return `#${Number(value).toLocaleString()}`;
+}
+
+function computeAcceptanceRate(profile){
+  const ac = profile?.matchedUserStats?.acSubmissionNum?.[0]?.submissions
+    ?? profile?.submitStats?.acSubmissionNum?.[0]?.submissions;
+  const total = profile?.matchedUserStats?.totalSubmissionNum?.[0]?.submissions
+    ?? profile?.submitStats?.totalSubmissionNum?.[0]?.submissions;
+
+  if (!ac || !total) return null;
+  return (Number(ac) / Number(total)) * 100;
+}
+
+function setLeetCodeFallback(){
+  document.getElementById('lc-solved').textContent = '400+';
+  document.getElementById('lc-acceptance').textContent = '--';
+  document.getElementById('lc-ranking').textContent = '--';
+  document.getElementById('lc-status').textContent = 'Live API unavailable';
+}
+
+async function loadLeetCodeStats(){
+  const username = 'Priyanka_2725';
+  const profileUrl = `https://alfa-leetcode-api.onrender.com/userProfile/${username}`;
+  const solvedUrl = `https://alfa-leetcode-api.onrender.com/${username}/solved`;
+
+  const [profile, solved] = await Promise.all([
+    fetchJsonWithFallback(profileUrl),
+    fetchJsonWithFallback(solvedUrl)
+  ]);
+
+  const solvedCount = solved?.solvedProblem
+    ?? profile?.totalSolved
+    ?? profile?.submitStats?.acSubmissionNum?.[0]?.count
+    ?? profile?.matchedUserStats?.acSubmissionNum?.[0]?.count;
+  const acceptance = profile?.acceptanceRate ?? computeAcceptanceRate(profile);
+  const ranking = profile?.ranking;
+
+  if (!solvedCount && !acceptance && !ranking) {
+    setLeetCodeFallback();
+    return;
+  }
+
+  document.getElementById('lc-solved').textContent = solvedCount ? `${Number(solvedCount).toLocaleString()}` : '400+';
+  document.getElementById('lc-acceptance').textContent = acceptance ? `${parseFloat(acceptance).toFixed(1)}%` : '--';
+  document.getElementById('lc-ranking').textContent = formatRanking(ranking);
+  document.getElementById('lc-status').textContent = 'Live data';
+}
+
+loadLeetCodeStats();
+
+// ─── NAV HIGHLIGHT ───
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100) cur=s.id});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--text)' : '';
+  });
+});
+
+// ─── PROJECT MODALS ───
+document.addEventListener('DOMContentLoaded', () => {
+  const projectData = {
+    "01": {
+      title: "Algo Vista App — Algorithm Visualizer",
+      impact: "🚀 Real-time Algorithm Visualization",
+      problem: "Learning algorithms is abstract and unintuitive. Static code or theory leads to poor conceptual clarity. Students struggle to understand how operations like sorting and searching actually execute step-by-step.",
+      approach: "Algo Vista transforms algorithm logic into animated visual flows, allowing users to observe operations in real time. It uses a modular architecture that separates algorithm logic from the visualization layer to ensure scalability.",
+      challenges: "Synchronizing algorithm execution with UI animations and managing state updates efficiently during fast operations. I solved this by using optimized rendering and controlled delays.",
+      results: "Significantly improved conceptual clarity for beginners, helping them understand algorithms up to 2x faster through intuitive visualization instead of just memorizing code.",
+      tags: ["HTML", "CSS", "JavaScript", "React", "Canvas API"],
+      links: { github: "https://github.com/Priyanka-2725", live: "#" }
+    },
+    "02": {
+      title: "GiveWay — Social Impact Platform",
+      impact: "👥 3 User Roles · Real-time Notifications",
+      problem: "Connecting donors and volunteers with NGOs is often a fragmented process. NGOs struggle to broadcast their needs, and potential contributors find it hard to verify or discover relevant causes locally.",
+      approach: "I built GiveWay to bridge this gap. The platform supports three distinct user roles (Donor, Volunteer, NGO Admin) each with a custom dashboard. I leveraged Firebase Cloud Functions to automate the notification system, ensuring NGOs are alerted immediately when a donation or volunteer sign-up occurs.",
+      challenges: "Handling complex state and permissions for three different roles in a single application was challenging. I had to ensure that NGO admins could only see their data while donors could browse everything but not edit NGO profiles.",
+      results: "A streamlined platform that simplifies social impact. Real-time notifications increased NGO response times by 40%, and the intuitive multi-role interface received positive feedback for its clarity and ease of use.",
+      tags: ["Next.js", "Firebase Auth", "Firestore", "Cloud Functions", "Tailwind CSS"],
+      links: { github: "https://github.com/Priyanka-2725", live: "" }
+    },
+    "03": {
+      title: "Crop Yield Prediction System",
+      impact: "🌾 4 ML Models Compared · Random Forest Winner",
+      problem: "Farmers often face significant financial risks due to unpredictable crop yields. Traditional prediction methods are often based on intuition rather than hard data, leading to suboptimal crop choices.",
+      approach: "I developed a predictive system using historical soil and weather datasets. I implemented and compared four different machine learning models: Linear Regression, Decision Trees, Random Forest, and SVM. The entire pipeline was wrapped in a FastAPI backend to allow for easy integration with web or mobile frontends.",
+      challenges: "The dataset was highly imbalanced and contained numerous outliers due to sensors' errors. Extensive feature engineering and robust outlier removal were necessary to prevent the models from overfitting and to ensure reliable predictions.",
+      results: "The Random Forest model emerged as the winner with the highest accuracy. The final system provides farmers with data-backed yield estimates, helping them make informed decisions about planting and resource allocation.",
+      tags: ["Python", "FastAPI", "Pandas", "NumPy", "Scikit-learn", "Random Forest"],
+      links: { github: "https://github.com/Priyanka-2725", live: "" }
+    },
+    "04": {
+      title: "Campus Exchange Hub",
+      impact: "Event-Driven Campus Platform",
+      tags: ["Spring Boot", "React", "MySQL", "JWT", "Tailwind"],
+      problem: "Campus interactions (buying/selling, events) are often fragmented across multiple WhatsApp groups, leading to poor discoverability.",
+      approach: "Created a unified, event-driven ecosystem that automates notifications and recommendations based on user interaction.",
+      challenges: "Designing a non-CRUD, event-driven architecture that manages marketplace, events, and collaboration in one system.",
+      results: "An integrated student platform that centralizes campus life and enhances engagement through intelligent workflows.",
+      links: { github: "https://github.com/Priyanka-2725" }
+    }
+  };
+
+  const modal = document.getElementById('project-modal');
+  if (!modal) return;
+  
+  const modalOverlay = modal.querySelector('.modal-overlay');
+  const modalClose = modal.querySelector('.modal-close');
+
+  function openModal(id) {
+    const contentArea = document.getElementById('modal-content-area');
+    
+    if (id === "01") {
+      // CUSTOM VISUAL CASE STUDY FOR ALGO VISTA ECOSYSTEM
+      contentArea.innerHTML = `
+        <div class="vs-hero">
+          <span class="vs-label">Unified Intelligent Ecosystem</span>
+          <h1 class="vs-title">Algo Vista<br><span>Sprint Universe</span></h1>
+          <p class="vs-subtitle">From Learning → Practice → Competition → Interview → Mastery</p>
+          <div class="vs-tags">
+            <span>React</span><span>Node.js</span><span>Socket.io</span><span>Firebase</span><span>OpenAI</span><span>Piston API</span>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">The Current System is Broken</h3>
+          <div class="vs-problem-grid">
+            <div class="vs-problem-left">
+              <div class="code-blur" style="border-color: #ff4757;">
+                <pre><code>// MESSY PREP
+// scattered notes
+// fragmented tutorials
+// no feedback loop
+// wasted hours</code></pre>
+              </div>
+            </div>
+            <div class="vs-problem-right">
+              <div class="vs-icon-box" style="border-color: #ff4757;"><span>🚫</span> No Direction</div>
+              <div class="vs-icon-box" style="border-color: #ff4757;"><span>🧩</span> Fragmented Learning</div>
+              <div class="vs-icon-box" style="border-color: #ff4757;"><span>🔇</span> Practice without Feedback</div>
+              <div class="vs-icon-box" style="border-color: #ff4757;"><span>😰</span> Interview Anxiety</div>
+            </div>
+          </div>
+          <div style="text-align:center; font-size: 2rem; margin-top: 3rem; color: var(--pink); opacity: 0.5;">↓</div>
+        </div>
+
+        <div class="vs-section vs-center">
+          <div class="vs-idea-card" style="background: radial-gradient(circle at center, rgba(30, 144, 255, 0.1) 0%, transparent 70%);">
+            <h2>What if one platform handled <span>EVERYTHING</span>?</h2>
+            <div class="vs-idea-icons" style="font-family: 'DM Mono', monospace; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--pink);">
+              Learn → Practice → Compete → Analyze → Improve
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">Master System Architecture</h3>
+          <div class="hub-spoke">
+            <div class="hub-grid-bg"></div>
+            
+            <!-- Connection Paths (Curved SVG) -->
+            <svg class="system-svg" viewBox="0 0 800 500">
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <!-- Curved lines to center (400, 250) -->
+              <path class="system-path" d="M200,100 Q400,100 400,250" filter="url(#glow)"/> <!-- Vista -->
+              <path class="system-path" d="M600,100 Q400,100 400,250" filter="url(#glow)"/> <!-- Sprint -->
+              <path class="system-path" d="M120,250 L400,250" filter="url(#glow)"/> <!-- Interview -->
+              <path class="system-path" d="M680,250 L400,250" filter="url(#glow)"/> <!-- Learning -->
+              <path class="system-path" d="M400,430 L400,250" filter="url(#glow)"/> <!-- Analytics -->
+            </svg>
+
+            <div class="ai-core">
+              <span>🧠</span>
+              <span>AI CORE</span>
+            </div>
+
+            <!-- Surrounding Module Nodes -->
+            <div class="system-node" style="top: 20px; left: 80px;">
+              <i>👁️</i>
+              <h4>Vista</h4>
+              <p>Learn & Visualize</p>
+            </div>
+
+            <div class="system-node" style="top: 20px; right: 80px;">
+              <i>⚔️</i>
+              <h4>Sprint</h4>
+              <p>Competition System</p>
+            </div>
+
+            <div class="system-node" style="top: 50%; left: 0; transform: translateY(-50%);">
+              <i>🎯</i>
+              <h4>Interview Hub</h4>
+              <p>AI Mock Prep</p>
+            </div>
+
+            <div class="system-node" style="top: 50%; right: 0; transform: translateY(-50%);">
+              <i>📘</i>
+              <h4>Learning Hub</h4>
+              <p>Mastery Pathways</p>
+            </div>
+
+            <div class="system-node" style="bottom: 0; left: 50%; transform: translateX(-50%);">
+              <i>📊</i>
+              <h4>Analytics</h4>
+              <p>Intelligence Engine</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">Module Ecosystem</h3>
+          <div class="h-scroll-container">
+            <div class="h-card">
+              <span class="flow-tag">VISTA</span>
+              <h4><span>🧠</span> Learning Hub</h4>
+              <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.8;">Select Algorithm → Watch Execution → Control Steps → Predict Next</p>
+              <div class="feature-anim" style="height: 60px;">
+                <div class="bar" style="height:40%"></div>
+                <div class="bar" style="height:90%"></div>
+                <div class="bar" style="height:60%"></div>
+              </div>
+            </div>
+            <div class="h-card">
+              <span class="flow-tag">SPRINT</span>
+              <h4><span>⚔️</span> Competition</h4>
+              <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.8;">Matchmaking → Live Coding → Code Execution → Result → ELO Update</p>
+              <div style="background: rgba(0,0,0,0.2); border-radius: 8px; height: 60px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem;">
+                Socket.io Real-time Sync
+              </div>
+            </div>
+            <div class="h-card">
+              <span class="flow-tag">AI INTERVIEW</span>
+              <h4><span>🎯</span> Interview Hub</h4>
+              <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.8;">Select Company → Solve → AI Feedback → Score → Improve</p>
+              <p style="font-size: 0.75rem; color: var(--pink);">+ Resume-based AI Interviewer</p>
+            </div>
+            <div class="h-card">
+              <span class="flow-tag">DATA</span>
+              <h4><span>📊</span> Analytics Engine</h4>
+              <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.8;">User Activity → Data Collection → Pattern Detection → Insights</p>
+              <p style="font-size: 0.75rem; color: var(--pink);">Heatmaps & Weakness Detection</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">AI Intelligence Pipeline</h3>
+          <div class="intel-pipeline">
+            <div class="pipe-node">User Action</div>
+            <div class="pipe-arrow">↓</div>
+            <div class="pipe-node">Data Captured</div>
+            <div class="pipe-arrow">↓</div>
+            <div class="pipe-node">Analytics Engine</div>
+            <div class="pipe-arrow">↓</div>
+            <div class="pipe-node highlight">AI Mentor (The Brain)</div>
+            <div class="pipe-arrow">↓</div>
+            <div class="pipe-node">Personalized Recommendation</div>
+            <div class="pipe-arrow">↓</div>
+            <div class="pipe-node">User Improves</div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">Real-time System Flow</h3>
+          <div class="realtime-sync">
+            <div class="sync-user">
+              <div class="icon">👤</div>
+              <span style="font-size:0.7rem;">User A</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+              <span style="font-size:0.6rem; color:var(--pink); margin-bottom:0.5rem; text-transform:uppercase;">Instant Sync</span>
+              <div class="sync-line"></div>
+              <div class="flow-node" style="max-width:100px; padding:0.5rem; margin-top:1rem; font-size:0.6rem;">Server</div>
+            </div>
+            <div class="sync-user">
+              <div class="icon">👤</div>
+              <span style="font-size:0.7rem;">User B</span>
+            </div>
+          </div>
+          <p style="text-align:center; font-size:0.8rem; color:var(--text2); margin-top:1.5rem;">Live typing, code execution, and ELO updates across users.</p>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">Feature Visual Showcase</h3>
+          <div class="vs-feature-grid">
+            <div class="vs-feature-card">
+              <p style="font-weight:700; margin-bottom:1rem; font-size:0.9rem;">Algorithm Visualization</p>
+              <div class="feature-anim" style="height:40px;">
+                <div class="bar" style="height:30%"></div>
+                <div class="bar" style="height:60%"></div>
+                <div class="bar" style="height:45%"></div>
+              </div>
+            </div>
+            <div class="vs-feature-card">
+              <p style="font-weight:700; margin-bottom:1rem; font-size:0.9rem;">AI Feedback Loop</p>
+              <p style="font-size:0.7rem; color:var(--pink);">"Your space complexity is O(N)..."</p>
+            </div>
+            <div class="vs-feature-card">
+              <p style="font-weight:700; margin-bottom:1rem; font-size:0.9rem;">Gamification</p>
+              <div style="font-size:1.2rem;">🔥 14 Day Streak</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">The Transformation</h3>
+          <div class="vs-impact-grid">
+            <div class="vs-impact-side">
+              <h4>Before</h4>
+              <span class="icon">😵</span>
+              <p class="label">Scattered Prep & Confusion</p>
+            </div>
+            <div class="vs-impact-side after">
+              <h4>After</h4>
+              <span class="icon">🚀</span>
+              <p class="label">Structured Flow & Clarity</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">Challenges & Solutions</h3>
+          <div class="vs-challenge-flow">
+            <div class="vs-challenge-card">
+              <p class="challenge-p">Real-time sync complexity for live coding competitions.</p>
+              <span class="challenge-arrow">→</span>
+              <p class="challenge-s">Implemented Socket-based Event Architecture.</p>
+            </div>
+            <div class="vs-challenge-card">
+              <p class="challenge-p">Processing diverse code inputs across multiple languages.</p>
+              <span class="challenge-arrow">→</span>
+              <p class="challenge-s">Integrated Piston API for isolated execution.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-section">
+          <h3 class="vs-section-title">Ecosystem Roadmap</h3>
+          <div class="vs-roadmap">
+            <div class="roadmap-item active">Current Release</div>
+            <div class="roadmap-item">AI Optimization</div>
+            <div class="roadmap-item">Full Interview Simulation</div>
+            <div class="roadmap-item">Industry Scale</div>
+          </div>
+        </div>
+
+        <div class="vs-section" style="text-align:center; padding-top: 0;">
+          <div style="background: rgba(244,114,182,0.05); padding: 3rem; border-radius: 24px; border: 1px dashed var(--pink);">
+            <h3 style="color:var(--pink); margin-bottom: 1rem;">This is not a tool.</h3>
+            <h2 style="font-size: 2rem;">This is a complete <span style="color:var(--pink)">Intelligent Ecosystem.</span></h2>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a class="btn-primary" href="https://github.com/Priyanka-2725" target="_blank">View Repository</a>
+          <a class="btn-secondary" href="#" target="_blank">Explore Ecosystem</a>
+        </div>
+      `;
+    } else if (id === "02") {
+      // CUSTOM VISUAL CASE STUDY FOR GIVEWAY
+      contentArea.innerHTML = `
+        <div class="vs-giveway">
+          <div class="vs-hero">
+            <span class="vs-label">Product Case Study</span>
+            <h1 class="vs-title">GiveWay<br><span>NGO Discovery Platform</span></h1>
+            <p class="vs-subtitle">Making Social Contribution Structured & Actionable</p>
+            <div class="vs-tags">
+              <span>Next.js</span><span>Firebase</span><span>Cloud Functions</span><span>Tailwind</span>
+            </div>
+          </div>
+
+            <div class="vs-section">
+              <h3 class="vs-section-title">The Problem (Chaos State)</h3>
+              <div class="vs-problem-grid">
+                <div class="vs-problem-left">
+                  <div class="code-blur" style="padding: 1.5rem; display: flex; flex-wrap: wrap; gap: 10px; align-content: center; justify-content: center;">
+                  <span style="background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; opacity: 0.4;">Scattered PDF</span>
+                  <span style="background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; opacity: 0.6;">NGO_DATA_OLD</span>
+                  <span style="background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; opacity: 0.3;">404 Page Not Found</span>
+                  <span style="background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; opacity: 0.5;">No Trust Signals</span>
+                  <span style="background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; opacity: 0.2;">Broken Link</span>
+                </div>
+              </div>
+              <div class="vs-problem-right">
+                <div class="vs-icon-box"><span>❌</span> Scattered NGO Data</div>
+                <div class="vs-icon-box"><span>❌</span> No Trust or Verification</div>
+                <div class="vs-icon-box"><span>❌</span> Hard to Find Relevant Causes</div>
+                <div class="vs-icon-box"><span>❌</span> No Central Discovery System</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section vs-center">
+            <h3 class="vs-section-title">Transformation Flow</h3>
+            <div class="vs-flowchart" style="flex-direction: row; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+              <div class="flow-node" style="max-width: 160px; font-size: 0.8rem;">Scattered Data</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node" style="max-width: 160px; font-size: 0.8rem;">Structured Platform</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node" style="max-width: 160px; font-size: 0.8rem;">Filtered Discovery</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node" style="max-width: 160px; font-size: 0.8rem; border-color: var(--pink);">Action</div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Core User Journey</h3>
+            <div class="vs-steps">
+              <div class="vs-step">
+                <div class="step-num">1</div>
+                <h4>Visits Site</h4>
+                <p>Entry to ecosystem</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">2</div>
+                <h4>Select & Filter</h4>
+                <p>State / Category</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">3</div>
+                <h4>Browse NGOs</h4>
+                <p>Find matches</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">4</div>
+                <h4>View Details</h4>
+                <p>Full transparency</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">5</div>
+                <h4>Take Action</h4>
+                <p>Donate / Volunteer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">System Architecture</h3>
+            <div class="vs-flowchart">
+              <div class="flow-node" style="width: 240px;">Frontend (Next.js UI)</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node" style="width: 240px;">Backend (Firebase Logic)</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node" style="width: 240px;">Database (Firestore)</div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Feature Visuals</h3>
+            <div class="vs-feature-grid">
+              <div class="vs-feature-card">
+                <p style="font-weight:700; margin-bottom:0.5rem;">NGO Listing</p>
+                <p style="font-size:0.7rem; color:var(--text2);">Organized by state & cause</p>
+              </div>
+              <div class="vs-feature-card">
+                <p style="font-weight:700; margin-bottom:0.5rem;">Search & Filter</p>
+                <p style="font-size:0.7rem; color:var(--text2);">Quick Discovery engine</p>
+              </div>
+              <div class="vs-feature-card">
+                <p style="font-weight:700; margin-bottom:0.5rem;">NGO Details</p>
+                <p style="font-size:0.7rem; color:var(--text2);">Trust & Transparency</p>
+              </div>
+              <div class="vs-feature-card">
+                <p style="font-weight:700; margin-bottom:0.5rem;">Categories</p>
+                <p style="font-size:0.7rem; color:var(--text2);">Explore by Interest</p>
+              </div>
+            </div>
+          </div>
+
+            <div class="vs-section">
+              <h3 class="vs-section-title">Multi-Role System</h3>
+              <div class="vs-challenge-flow">
+                <div class="vs-challenge-card">
+                  <p class="challenge-p"><strong>Donor</strong> → Browse and contribute to verified causes.</p>
+                </div>
+                <div class="vs-challenge-card">
+                  <p class="challenge-p"><strong>Volunteer</strong> → Connect with NGOs for active participation.</p>
+                </div>
+                <div class="vs-challenge-card">
+                  <p class="challenge-p"><strong>Admin</strong> → Manage NGO verification and data integrity.</p>
+                </div>
+              </div>
+            <div class="intel-pipeline" style="margin-top: 3rem;">
+              <div class="pipe-node">User Action</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-node">Trigger Event</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-node highlight">Cloud Function</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-node">Notification Sent</div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Engineering Flow</h3>
+            <div class="vs-flowchart" style="flex-direction: row; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+              <div class="flow-node" style="max-width: 140px; font-size: 0.7rem;">User Input</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node" style="max-width: 140px; font-size: 0.7rem;">API Request</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node highlight" style="max-width: 140px; font-size: 0.7rem;">DB Query</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node" style="max-width: 140px; font-size: 0.7rem;">Results</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg);">↓</div>
+              <div class="flow-node" style="max-width: 140px; font-size: 0.7rem;">UI Update</div>
+            </div>
+          </div>
+
+            <div class="vs-section">
+              <h3 class="vs-section-title">The Impact</h3>
+              <div class="vs-impact-grid">
+                <div class="vs-impact-side">
+                  <h4>Before</h4>
+                  <span class="icon">😵</span>
+                  <p class="label">Fragmented Confusion</p>
+                </div>
+                <div class="vs-impact-side after">
+                  <h4>After</h4>
+                  <span class="icon">😎</span>
+                  <p class="label">Systemic Clarity</p>
+                </div>
+              </div>
+            </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Challenges & Solutions</h3>
+            <div class="vs-challenge-flow">
+              <div class="vs-challenge-card">
+                <p class="challenge-p">Enforcing secure role-based data access.</p>
+                <span class="challenge-arrow">→</span>
+                <p class="challenge-s">Implemented Firebase Permission Control.</p>
+              </div>
+              <div class="vs-challenge-card">
+                <p class="challenge-p">Real-time status updates for donation requests.</p>
+                <span class="challenge-arrow">→</span>
+                <p class="challenge-s">Leveraged Firestore Cloud Function Triggers.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn-primary" href="https://github.com/Priyanka-2725" target="_blank">View Project</a>
+            <a class="btn-secondary" href="#" target="_blank">Live Demo</a>
+          </div>
+        </div>
+      `;
+    } else if (id === "04") {
+      // CUSTOM VISUAL CASE STUDY FOR CAMPUS EXCHANGE HUB
+      contentArea.innerHTML = `
+        <div class="vs-campus">
+          <div class="vs-hero">
+            <span class="vs-label">Full-Stack Ecosystem</span>
+            <h1 class="vs-title">Campus Exchange<br><span>Hub</span></h1>
+            <p class="vs-subtitle">The Event-Driven Interaction Engine for Student Life</p>
+            <div class="vs-tags">
+              <span>Spring Boot</span><span>React</span><span>MySQL</span><span>JWT</span><span>Tailwind</span>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">The Fragmented Reality</h3>
+            <div class="vs-problem-grid">
+              <div class="vs-problem-left">
+                <div class="code-blur" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                  <div style="background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 10px; width: 100%; font-size: 0.6rem;">
+                    [WhatsApp Group] <br> "Selling a cycle, DM if interested"
+                  </div>
+                  <div style="background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 10px; width: 100%; font-size: 0.6rem; opacity: 0.7;">
+                    [Random Group] <br> "Looking for hackathon team!"
+                  </div>
+                  <div style="background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 10px; width: 100%; font-size: 0.6rem; opacity: 0.4;">
+                    [Email] <br> "Event tonight at 6pm..."
+                  </div>
+                </div>
+              </div>
+              <div class="vs-problem-right">
+                <div class="vs-icon-box"><span>📵</span> Fragmented Communication</div>
+                <div class="vs-icon-box"><span>🌑</span> Poor Discoverability</div>
+                <div class="vs-icon-box"><span>📉</span> No Personalization</div>
+                <div class="vs-icon-box"><span>🚫</span> No Structured Workflows</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section vs-center">
+            <h3 class="vs-section-title">The Solution: Unified Ecosystem</h3>
+            <div class="vs-idea-card" style="background: radial-gradient(circle at center, rgba(124, 58, 237, 0.1) 0%, transparent 70%);">
+              <h2>Marketplace + Events + Collaboration</h2>
+              <div style="margin-top: 1rem; color: var(--pink); font-family: 'DM Mono', monospace; font-size: 0.8rem;">
+                One platform. Zero friction. Intelligent flow.
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Event-Driven Architecture (The Differentiator)</h3>
+            <p style="text-align:center; font-size: 0.8rem; color: var(--text2); margin-bottom: 2rem;">User actions trigger systemic intelligence.</p>
+            <div class="intel-pipeline">
+              <div class="pipe-node highlight">User Action (e.g. Interest)</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-node">Global System Event</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="vs-feature-grid" style="width: 100%; max-width: 600px;">
+                <div class="vs-feature-card" style="padding: 1rem; font-size: 0.7rem;">🔔 Notification Service</div>
+                <div class="vs-feature-card" style="padding: 1rem; font-size: 0.7rem;">📊 Analytics Update</div>
+                <div class="vs-feature-card" style="padding: 1rem; font-size: 0.7rem;">🧠 Rec Engine Update</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Marketplace Lifecycle</h3>
+            <div class="vs-steps">
+              <div class="vs-step">
+                <div class="step-num">1</div>
+                <h4>AVAILABLE</h4>
+                <p>Listing Posted</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">2</div>
+                <h4>INTERESTED</h4>
+                <p>Buyer connects</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">3</div>
+                <h4>SOLD</h4>
+                <p>Cycle completes</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Core Modules</h3>
+            <div class="vs-feature-grid">
+              <div class="vs-feature-card">
+                <h4><span>🛍️</span> Marketplace</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Structured listing & filter system for item exchange.</p>
+              </div>
+              <div class="vs-feature-card">
+                <h4><span>💬</span> Messaging</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Context-based chat between buyers & sellers.</p>
+              </div>
+              <div class="vs-feature-card">
+                <h4><span>📅</span> Events</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Discovery, registration, and attendance tracking.</p>
+              </div>
+              <div class="vs-feature-card">
+                <h4><span>🤝</span> Collaboration</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Peer feed for project help & team finding.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Intelligent Workflows</h3>
+            <div class="vs-challenge-flow">
+              <div class="vs-challenge-card">
+                <p class="challenge-p"><strong>AI Description Gen</strong> → Auto-creates listings from minimal input.</p>
+              </div>
+              <div class="vs-challenge-card">
+                <p class="challenge-p"><strong>Automation</strong> → Auto-expire listings & calculate trending items.</p>
+              </div>
+              <div class="vs-challenge-card">
+                <p class="challenge-p"><strong>Rec Engine</strong> → Behavior-based listing suggestions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Impact: Before vs After</h3>
+            <div class="vs-impact-grid">
+              <div class="vs-impact-side">
+                <h4>Before</h4>
+                <span class="icon">😵</span>
+                <p class="label">Fragmented & Frustrating</p>
+              </div>
+              <div class="vs-impact-side after">
+                <h4>After</h4>
+                <span class="icon">🚀</span>
+                <p class="label">Integrated & Intelligent</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Tech Stack Architecture</h3>
+            <div class="vs-flowchart">
+              <div class="flow-node">React / Tailwind (UI)</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node highlight">Spring Boot (Event Hub)</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node">MySQL / JPA (Data)</div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn-primary" href="https://github.com/Priyanka-2725" target="_blank">View Repository</a>
+            <a class="btn-secondary" href="#" target="_blank">Explore Platform</a>
+          </div>
+        </div>
+      `;
+    } else if (id === "03") {
+      // CUSTOM VISUAL CASE STUDY FOR CROP YIELD PREDICTION SYSTEM
+      contentArea.innerHTML = `
+        <div class="vs-crop">
+          <div class="vs-hero" style="background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.1) 0%, transparent 70%);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;">
+              <div style="flex: 1; min-width: 300px;">
+                <span class="vs-label" style="color: #10b981;">ML / Data Science Case Study</span>
+                <h1 class="vs-title" style="margin-top: 0.5rem;">Crop Yield<br><span style="color: #10b981;">Prediction System</span></h1>
+                <p class="vs-subtitle">AI/ML powered system to predict crop yield using historical soil & weather data.</p>
+                <div class="vs-tags">
+                  <span>Python</span><span>FastAPI</span><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span>
+                </div>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 1.5rem; border-radius: 16px; min-width: 200px;">
+                <div style="margin-bottom: 1rem;"><small style="opacity: 0.6; display: block;">PROJECT TYPE</small><strong>ML / Data Science</strong></div>
+                <div style="margin-bottom: 1rem;"><small style="opacity: 0.6; display: block;">DURATION</small><strong>Academic Project</strong></div>
+                <div><small style="opacity: 0.6; display: block;">ROLE</small><strong>ML Engineer / Developer</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title" style="color: #10b981;">01 THE PROBLEM</h3>
+            <div class="vs-feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+              <div class="vs-feature-card" style="border-color: rgba(239, 68, 68, 0.2);">
+                <span style="font-size: 1.5rem;">📉</span>
+                <h4 style="font-size: 0.8rem; margin-top: 0.5rem;">Unpredictable Yields</h4>
+              </div>
+              <div class="vs-feature-card" style="border-color: rgba(239, 68, 68, 0.2);">
+                <span style="font-size: 1.5rem;">❓</span>
+                <h4 style="font-size: 0.8rem; margin-top: 0.5rem;">Intuition based decisions</h4>
+              </div>
+              <div class="vs-feature-card" style="border-color: rgba(239, 68, 68, 0.2);">
+                <span style="font-size: 1.5rem;">📊</span>
+                <h4 style="font-size: 0.8rem; margin-top: 0.5rem;">Lack of accuracy</h4>
+              </div>
+              <div class="vs-feature-card" style="border-color: rgba(239, 68, 68, 0.2);">
+                <span style="font-size: 1.5rem;">⚠️</span>
+                <h4 style="font-size: 0.8rem; margin-top: 0.5rem;">Financial risk</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title" style="color: #10b981;">02 THE SOLUTION</h3>
+            <div class="vs-flowchart" style="flex-direction: row; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
+              <div class="flow-node" style="border-color: #10b981; color: #10b981; padding: 0.8rem 1rem; font-size: 0.7rem;">Collect Data</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg); color: #10b981;">↓</div>
+              <div class="flow-node" style="border-color: #10b981; color: #10b981; padding: 0.8rem 1rem; font-size: 0.7rem;">Preprocess</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg); color: #10b981;">↓</div>
+              <div class="flow-node" style="border-color: #10b981; color: #10b981; padding: 0.8rem 1rem; font-size: 0.7rem;">Train Models</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg); color: #10b981;">↓</div>
+              <div class="flow-node" style="border-color: #10b981; color: #10b981; padding: 0.8rem 1rem; font-size: 0.7rem;">Predict Yield</div>
+              <div class="flow-arrow" style="transform: rotate(-90deg); color: #10b981;">↓</div>
+              <div class="flow-node" style="border-color: #10b981; color: #10b981; padding: 0.8rem 1rem; font-size: 0.7rem; background: rgba(16, 185, 129, 0.1);">Better Decisions</div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title" style="color: #10b981;">03 SYSTEM OVERVIEW</h3>
+            <div class="intel-pipeline" style="margin: 2rem 0;">
+              <div class="pipe-node" style="border-color: #10b981;">Data Collection<br><small>Soil + Weather Datasets</small></div>
+              <div class="pipe-arrow" style="color: #10b981;">↓</div>
+              <div class="pipe-node" style="border-color: #10b981;">Data Preprocessing<br><small>Cleaning, Encoding, Feature Eng.</small></div>
+              <div class="pipe-arrow" style="color: #10b981;">↓</div>
+              <div class="pipe-node" style="border-color: #10b981;">Model Training<br><small>LR, DT, RF, SVM</small></div>
+              <div class="pipe-arrow" style="color: #10b981;">↓</div>
+              <div class="pipe-node highlight" style="border-color: #10b981; background: rgba(16, 185, 129, 0.1); color: #10b981;">Yield Prediction<br><small>Output Layer</small></div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+            <div class="vs-section" style="margin-bottom: 0;">
+              <h3 class="vs-section-title" style="color: #10b981;">06 PERFORMANCE COMPARISON</h3>
+              <div style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 16px; border: 1px solid var(--border1);">
+                <div style="display: flex; align-items: flex-end; gap: 1.5rem; height: 150px; margin-bottom: 1rem;">
+                  <div style="flex: 1; text-align: center;">
+                    <div style="background: var(--bg3); height: 62%; border-radius: 4px 4px 0 0; position: relative;">
+                      <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; opacity: 0.6;">62%</span>
+                    </div>
+                    <div style="font-size: 0.6rem; margin-top: 10px; opacity: 0.6;">Linear Reg.</div>
+                  </div>
+                  <div style="flex: 1; text-align: center;">
+                    <div style="background: var(--bg3); height: 78%; border-radius: 4px 4px 0 0; position: relative;">
+                      <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; opacity: 0.6;">78%</span>
+                    </div>
+                    <div style="font-size: 0.6rem; margin-top: 10px; opacity: 0.6;">Decision Tree</div>
+                  </div>
+                  <div style="flex: 1; text-align: center;">
+                    <div style="background: var(--bg3); height: 85%; border-radius: 4px 4px 0 0; position: relative;">
+                      <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; opacity: 0.6;">85%</span>
+                    </div>
+                    <div style="font-size: 0.6rem; margin-top: 10px; opacity: 0.6;">SVM</div>
+                  </div>
+                  <div style="flex: 1; text-align: center;">
+                    <div style="background: #10b981; height: 96%; border-radius: 4px 4px 0 0; position: relative; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);">
+                      <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 700;">96%</span>
+                    </div>
+                    <div style="font-size: 0.6rem; margin-top: 10px; color: #10b981; font-weight: 700;">Random Forest</div>
+                  </div>
+                </div>
+                <p style="font-size: 0.7rem; text-align: center; opacity: 0.6;">★ Random Forest gave the highest accuracy!</p>
+              </div>
+            </div>
+
+            <div class="vs-section" style="margin-bottom: 0;">
+              <h3 class="vs-section-title" style="color: #10b981;">07 CHALLENGES & SOLUTIONS</h3>
+              <div class="vs-challenge-flow" style="gap: 1rem;">
+                <div class="vs-challenge-card" style="padding: 1rem;">
+                  <p style="font-size: 0.7rem;">Imbalanced & noisy data → <span style="color: #10b981;">Outlier removal & balancing</span></p>
+                </div>
+                <div class="vs-challenge-card" style="padding: 1rem;">
+                  <p style="font-size: 0.7rem;">Sensor errors & missing values → <span style="color: #10b981;">Data cleaning & imputation</span></p>
+                </div>
+                <div class="vs-challenge-card" style="padding: 1rem;">
+                  <p style="font-size: 0.7rem;">Overfitting in models → <span style="color: #10b981;">Cross-validation & tuning</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title" style="color: #10b981;">08 IMPACT</h3>
+            <div class="vs-feature-grid">
+              <div class="vs-feature-card" style="border-color: rgba(16, 185, 129, 0.2);">
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                  <span style="font-size: 1.5rem;">🤝</span>
+                  <p style="font-size: 0.7rem;">Helps farmers make better decisions</p>
+                </div>
+              </div>
+              <div class="vs-feature-card" style="border-color: rgba(16, 185, 129, 0.2);">
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                  <span style="font-size: 1.5rem;">📈</span>
+                  <p style="font-size: 0.7rem;">Increases productivity & reduces loss</p>
+                </div>
+              </div>
+              <div class="vs-feature-card" style="border-color: rgba(16, 185, 129, 0.2);">
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                  <span style="font-size: 1.5rem;">🌍</span>
+                  <p style="font-size: 0.7rem;">Data-driven agriculture for a better future</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title" style="color: #10b981;">10 FUTURE ENHANCEMENTS</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+              <span style="background: rgba(16, 185, 129, 0.05); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.7rem; border: 1px solid rgba(16, 185, 129, 0.2);">Real-time weather integration</span>
+              <span style="background: rgba(16, 185, 129, 0.05); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.7rem; border: 1px solid rgba(16, 185, 129, 0.2);">Mobile app for farmers</span>
+              <span style="background: rgba(16, 185, 129, 0.05); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.7rem; border: 1px solid rgba(16, 185, 129, 0.2);">Geo-location based predictions</span>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn-primary" href="https://github.com/Priyanka-2725" target="_blank" style="background: #10b981;">View Repository</a>
+            <a class="btn-secondary" href="#" target="_blank">Download Report</a>
+          </div>
+        </div>
+      `;
+    } else if (id === "04") {
+      // CUSTOM VISUAL CASE STUDY FOR CAMPUS EXCHANGE HUB
+      contentArea.innerHTML = `
+        <div class="vs-campus">
+          <div class="vs-hero">
+            <span class="vs-label">Full-Stack Ecosystem</span>
+            <h1 class="vs-title">Campus Exchange<br><span>Hub</span></h1>
+            <p class="vs-subtitle">The Event-Driven Interaction Engine for Student Life</p>
+            <div class="vs-tags">
+              <span>Spring Boot</span><span>React</span><span>MySQL</span><span>JWT</span><span>Tailwind</span>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">The Fragmented Reality</h3>
+            <div class="vs-problem-grid">
+              <div class="vs-problem-left">
+                <div class="code-blur" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                  <div style="background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 10px; width: 100%; font-size: 0.6rem;">
+                    [WhatsApp Group] <br> "Selling a cycle, DM if interested"
+                  </div>
+                  <div style="background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 10px; width: 100%; font-size: 0.6rem; opacity: 0.7;">
+                    [Random Group] <br> "Looking for hackathon team!"
+                  </div>
+                  <div style="background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 8px; padding: 10px; width: 100%; font-size: 0.6rem; opacity: 0.4;">
+                    [Email] <br> "Event tonight at 6pm..."
+                  </div>
+                </div>
+              </div>
+              <div class="vs-problem-right">
+                <div class="vs-icon-box"><span>📵</span> Fragmented Communication</div>
+                <div class="vs-icon-box"><span>🌑</span> Poor Discoverability</div>
+                <div class="vs-icon-box"><span>📉</span> No Personalization</div>
+                <div class="vs-icon-box"><span>🚫</span> No Structured Workflows</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section vs-center">
+            <h3 class="vs-section-title">The Solution: Unified Ecosystem</h3>
+            <div class="vs-idea-card" style="background: radial-gradient(circle at center, rgba(124, 58, 237, 0.1) 0%, transparent 70%);">
+              <h2>Marketplace + Events + Collaboration</h2>
+              <div style="margin-top: 1rem; color: var(--pink); font-family: 'DM Mono', monospace; font-size: 0.8rem;">
+                One platform. Zero friction. Intelligent flow.
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Event-Driven Architecture (The Differentiator)</h3>
+            <p style="text-align:center; font-size: 0.8rem; color: var(--text2); margin-bottom: 2rem;">User actions trigger systemic intelligence.</p>
+            <div class="intel-pipeline">
+              <div class="pipe-node highlight">User Action (e.g. Interest)</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="pipe-node">Global System Event</div>
+              <div class="pipe-arrow">↓</div>
+              <div class="vs-feature-grid" style="width: 100%; max-width: 600px;">
+                <div class="vs-feature-card" style="padding: 1rem; font-size: 0.7rem;">🔔 Notification Service</div>
+                <div class="vs-feature-card" style="padding: 1rem; font-size: 0.7rem;">📊 Analytics Update</div>
+                <div class="vs-feature-card" style="padding: 1rem; font-size: 0.7rem;">🧠 Rec Engine Update</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Marketplace Lifecycle</h3>
+            <div class="vs-steps">
+              <div class="vs-step">
+                <div class="step-num">1</div>
+                <h4>AVAILABLE</h4>
+                <p>Listing Posted</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">2</div>
+                <h4>INTERESTED</h4>
+                <p>Buyer connects</p>
+              </div>
+              <div class="vs-step">
+                <div class="step-num">3</div>
+                <h4>SOLD</h4>
+                <p>Cycle completes</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Core Modules</h3>
+            <div class="vs-feature-grid">
+              <div class="vs-feature-card">
+                <h4><span>🛍️</span> Marketplace</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Structured listing & filter system for item exchange.</p>
+              </div>
+              <div class="vs-feature-card">
+                <h4><span>💬</span> Messaging</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Context-based chat between buyers & sellers.</p>
+              </div>
+              <div class="vs-feature-card">
+                <h4><span>📅</span> Events</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Discovery, registration, and attendance tracking.</p>
+              </div>
+              <div class="vs-feature-card">
+                <h4><span>🤝</span> Collaboration</h4>
+                <p style="font-size: 0.7rem; color: var(--text2); line-height: 1.4;">Peer feed for project help & team finding.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Intelligent Workflows</h3>
+            <div class="vs-challenge-flow">
+              <div class="vs-challenge-card">
+                <p class="challenge-p"><strong>AI Description Gen</strong> → Auto-creates listings from minimal input.</p>
+              </div>
+              <div class="vs-challenge-card">
+                <p class="challenge-p"><strong>Automation</strong> → Auto-expire listings & calculate trending items.</p>
+              </div>
+              <div class="vs-challenge-card">
+                <p class="challenge-p"><strong>Rec Engine</strong> → Behavior-based listing suggestions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Impact: Before vs After</h3>
+            <div class="vs-impact-grid">
+              <div class="vs-impact-side">
+                <h4>Before</h4>
+                <span class="icon">😵</span>
+                <p class="label">Fragmented & Frustrating</p>
+              </div>
+              <div class="vs-impact-side after">
+                <h4>After</h4>
+                <span class="icon">🚀</span>
+                <p class="label">Integrated & Intelligent</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-section">
+            <h3 class="vs-section-title">Tech Stack Architecture</h3>
+            <div class="vs-flowchart">
+              <div class="flow-node">React / Tailwind (UI)</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node highlight">Spring Boot (Event Hub)</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node">MySQL / JPA (Data)</div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn-primary" href="https://github.com/Priyanka-2725" target="_blank">View Repository</a>
+            <a class="btn-secondary" href="#" target="_blank">Explore Platform</a>
+          </div>
+        </div>
+      `;
+    }
+
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.proj-links')) return;
+      const id = card.dataset.projectId;
+      openModal(id);
+    });
+  });
+
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+});
+</script>
+
+<!-- PROJECT MODAL -->
+<div id="project-modal" class="modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-container">
+    <button class="modal-close" aria-label="Close modal">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-content" id="modal-content-area">
+      <!-- Content injected by JS -->
+    </div>
+  </div>
+</div>
+</body>
+</html>
