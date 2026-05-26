@@ -11,6 +11,7 @@
   --pink:#f472b6;
   --pink-dim:#9d4071;
   --pink-glow:rgba(244,114,182,0.15);
+  --nav-height:80px;
   --bg:#0a0a0b;
   --bg2:#111114;
   --bg3:#18181d;
@@ -23,6 +24,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
+  padding-top:var(--nav-height);
   font-family:'Syne',sans-serif;
   font-size:16px;
   line-height:1.6;
@@ -108,7 +110,7 @@ nav{
 
 /* ─── HERO ─── */
 #hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  min-height:calc(100vh - var(--nav-height));display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
 .hero-bg{
